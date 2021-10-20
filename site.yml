@@ -1,0 +1,21 @@
+- name: Monitoring Servers
+  hosts: monitoring
+  gather_facts: no
+  tasks:
+    - debug:
+        msg: Monitoring Server setup here
+
+- name: Application Servers
+  hosts: web
+  gather_facts: no
+  tasks:
+    - debug:
+        msg: App Server config
+
+- name: Common Clients
+  hosts: all
+  gather_facts: no
+  tasks:
+    - debug:
+        msg: Setup Common Needs
+

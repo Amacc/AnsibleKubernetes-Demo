@@ -1,0 +1,7 @@
+
+- name: Setup Site K8s Job
+  hosts: localhost 
+  roles: 
+  - k8s
+  vars:
+    ansible_python_interpreter: python3

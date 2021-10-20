@@ -1,0 +1,15 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: ansible-jobs
+spec:
+  schedule: "* */1 * * *"
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+          - name: ansible-job
+            image: registry.domain.com/infrastructure/ansible/site
+            imagePullPolicy: IfNotPresent
+          restartPolicy: Never # OnFailure

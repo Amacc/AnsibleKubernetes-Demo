@@ -1,0 +1,38 @@
+all:
+  children:
+    monitoring:
+      hosts:
+        monitoring01.domain.local:
+        monitoring02.domain.local:
+
+    jumpboxes:
+      hosts:
+        jb01.domain.local:
+
+    web:
+      hosts:
+        web01.domain.local:
+        web02.domain.local:
+        web03.domain.local:
+      vars:
+        application_port: 80
+
+    domain_controllers:
+      hosts:
+        ad01.domain.local:
+        ad02.domain.local:
+    
+    t2:
+      children:
+        monitoring:
+        jumpboxes:
+    
+    t1:
+      children:
+        domain_controllers:
+        
+  vars:
+    domain: contoso.local
+    dns_resource_name: internal-dns
+    dns_namespace: coredns
+

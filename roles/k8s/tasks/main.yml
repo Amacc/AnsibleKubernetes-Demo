@@ -1,0 +1,27 @@
+- name: Docker Python
+  ansible.builtin.pip: 
+    name: docker
+  
+- name: Build Docker Job Image
+  community.docker.docker_image:
+    build:
+      path: .
+    name: registry.domain.com/infrastructure/ansible/site
+    tag: latest
+    source: build
+    force_tag: yes
+    force_source: yes
+    # push: true
+
+- name: Automation Namespace
+  community.kubernetes.k8s:
+    name: automation
+    api_version: v1
+    kind: Namespace
+    state: present
+
+- name: K8s Cron Job
+  community.kubernetes.k8s:
+    namespace: automation
+    definition: "{{ lookup('template', 'cron.yml') | from_yaml }}"
+    state: present

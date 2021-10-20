@@ -1,0 +1,17 @@
+- name: Load the Linux Variables
+  include_vars:
+    linux.yml
+
+- name: Install the latest version of packages
+  ansible.builtin.package:
+    name: "*"
+    state: latest
+
+- name: Check if a reboot is required
+  command: needs-restarting -r
+  register: reg_reboot_required
+  ignore_errors: yes
+  failed_when: false
+  changed_when: reg_reboot_required.rc != 0
+  notify:
+    - Reboot Server

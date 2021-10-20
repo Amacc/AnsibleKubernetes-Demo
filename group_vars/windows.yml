@@ -1,0 +1,5 @@
+ansible_connection: winrm
+ansible_winrm_transport: kerberos
+ansible_winrm_server_cert_validation: ignore
+# ansible_user: windows_user
+# ansible_password: windows_password

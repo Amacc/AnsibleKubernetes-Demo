@@ -1,0 +1,4 @@
+- name: Patch Instances
+  hosts: "{{ patch_group | default('localhost') }}"
+  roles:
+    - patch-manager
